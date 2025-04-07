@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalTech Solutions | Юридические услуги и создание сайтов</title>
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #172a45;
+            --accent: #64ffda;
+            --text-primary: #ccd6f6;
+            --text-secondary: #8892b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(10, 25, 47, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-subtitle {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .hero-title {
+            font-size: 60px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-description {
+            color: var(--text-secondary);
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--accent);
+            padding: 15px 30px;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 20px;
+        }
+
+        .btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .btn-filled {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-filled:hover {
+            background: rgba(100, 255, 218, 0.8);
+        }
+
+        /* Services Section */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: var(--text-secondary);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--secondary);
+            border-radius: 8px;
+            padding: 40px 30px;
+            transition: transform 0.3s;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .service-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .service-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(140px, 200px));
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .skills-list li {
+            list-style: none;
+            position: relative;
+            padding-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        .skills-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .about-image {
+            position: relative;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent);
+            top: 20px;
+            left: 20px;
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 4px;
+            filter: grayscale(100%) contrast(1);
+            transition: all 0.3s;
+        }
+
+        .about-image:hover img {
+            filter: none;
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .contact-subtitle {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 50px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-link:hover {
+            color: var(--text-primary);
+            transform: translateY(-3px);
+        }
+
+        .contact-link i {
+            margin-right: 10px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background: var(--secondary);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Digital Elements */
+        .digital-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .digital-line {
+            position: absolute;
+            background: var(--accent);
+            opacity: 0.5;
+        }
+
+        .digital-line.horizontal {
+            width: 100%;
+            height: 1px;
+        }
+
+        .digital-line.vertical {
+            width: 1px;
+            height: 100%;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 1px solid var(--accent);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 40px;
+            }
+
+            .hero-description {
+                font-size: 18px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                margin-top: 50px;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Digital Background Elements -->
+    <div class="digital-bg">
+        <div class="digital-line horizontal" style="top: 20%;"></div>
+        <div class="digital-line horizontal" style="top: 40%;"></div>
+        <div class="digital-line horizontal" style="top: 60%;"></div>
+        <div class="digital-line horizontal" style="top: 80%;"></div>
+        <div class="digital-line vertical" style="left: 20%;"></div>
+        <div class="digital-line vertical" style="left: 40%;"></div>
+        <div class="digital-line vertical" style="left: 60%;"></div>
+        <div class="digital-line vertical" style="left: 80%;"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">LegalTech</div>
+                <ul class="nav-links">
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                <button class="mobile-menu-btn">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-subtitle">Приветствуем вас в LegalTech Solutions</p>
+                <h1 class="hero-title">Юридические услуги <span>нового поколения</span></h1>
+                <p class="hero-description">
+                    Мы объединяем юридическую экспертизу и цифровые технологии, чтобы предложить вам 
+                    комплексные решения в области информационного права и веб-разработки для юридических фирм.
+                </p>
+                <a href="#services" class="btn btn-filled">Наши услуги</a>
+                <a href="#contact" class="btn">Связаться с нами</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3 class="service-title">Создание сайтов для юрфирм</h3>
+                    <p class="service-description">
+                        Профессиональная разработка современных, безопасных и функциональных 
+                        веб-сайтов для юридических фирм с учетом всех отраслевых требований.
+                    </p>
+                    <ul class="skills-list">
+                        <li>Адаптивный дизайн</li>
+                        <li>Юридический конструктор</li>
+                        <li>Интеграция с CRM</li>
+                        <li>Защита персональных данных</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚖️</div>
+                    <h3 class="service-title">Юридические консультации</h3>
+                    <p class="service-description">
+                        Экспертные консультации в области информационного права, защиты данных, 
+                        интеллектуальной собственности и цифровых активов.
+                    </p>
+                    <ul class="skills-list">
+                        <li>152-ФЗ</li>
+                        <li>Кибербезопасность</li>
+                        <li>Лицензирование ПО</li>
+                        <li>Цифровые контракты</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">О нашей команде</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Мы - уникальная команда, объединяющая опытных юристов и талантливых разработчиков. 
+                        Наш подход сочетает глубокое понимание юридических процессов с передовыми 
+                        цифровыми технологиями.
+                    </p>
+                    <p>
+                        Наши юристы специализируются на информационном праве и имеют успешный опыт 
+                        ведения дел в digital-сфере. Разработчики в нашей команде создают не просто 
+                        сайты, а полноценные юридические инструменты.
+                    </p>
+                    <p>
+                        Такое сочетание позволяет нам предлагать клиентам комплексные решения, 
+                        которые действительно работают в современных реалиях.
+                    </p>
+                    <ul class="skills-list">
+                        <li>50+ успешных проектов</li>
+                        <li>Собственные digital-решения</li>
+                        <li>Индивидуальный подход</li>
+                    </ul>
+                </div>
+                <div class="about-image floating">
+                    <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Наша команда">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <p class="hero-subtitle">Свяжитесь с нами</p>
+            <h2 class="contact-title">Готовы начать проект?</h2>
+            <p class="contact-subtitle">
+                Мы всегда открыты для обсуждения новых проектов и сотрудничества. 
+                Напишите нам, и мы свяжемся с вами в ближайшее время.
+            </p>
+            <a href="mailto:2magadiev2@mail.ru" class="btn btn-filled">Написать на почту</a>
+            <div class="contact-links">
+                <a href="https://t.me/Zelim_1" class="contact-link" target="_blank">
+                    <i>📱</i> Telegram: Zelim_1
+                </a>
+                <a href="mailto:2magadiev2@mail.ru" class="contact-link">
+                    <i>✉️</i> 2magadiev2@mail.ru
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 LegalTech Solutions. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add digital lines dynamically
+        function createDigitalLines() {
+            const digitalBg = document.querySelector('.digital-bg');
+            const linesCount = 20;
+            
+            for (let i = 0; i < linesCount; i++) {
+                const line = document.createElement('div');
+                line.classList.add('digital-line');
+                
+                // Randomly decide if line is horizontal or vertical
+                if (Math.random() > 0.5) {
+                    line.classList.add('horizontal');
+                    line.style.top = `${Math.random() * 100}%`;
+                    line.style.width = `${Math.random() * 30 + 10}%`;
+                    line.style.left = `${Math.random() * 70}%`;
+                } else {
+                    line.classList.add('vertical');
+                    line.style.left = `${Math.random() * 100}%`;
+                    line.style.height = `${Math.random() * 30 + 10}%`;
+                    line.style.top = `${Math.random() * 70}%`;
+                }
+                
+                // Random opacity
+                line.style.opacity = Math.random() * 0.3;
+                
+                // Random animation
+                line.style.animation = `fadeInOut ${Math.random() * 10 + 5}s infinite`;
+                
+                digitalBg.appendChild(line);
+            }
+        }
+
+        // Create lines on load
+        window.addEventListener('load', createDigitalLines);
+
+        // Add scroll animation to elements
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.service-card, .about-image, .section-title');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Set initial state
+        document.querySelectorAll('.service-card, .about-image').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s, transform 0.6s';
+        });
+
+        // Animate on scroll
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Run once on load
+    </script>
+</body>
+</html>
